@@ -1,0 +1,11 @@
+[package]
+name = "tsp_exhaustive_search"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tsplib = "0.1.0"
+rayon = "1.5.2"
+itertools = "0.10.3"
