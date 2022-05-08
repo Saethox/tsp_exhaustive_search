@@ -5,7 +5,6 @@ use std::ops::{Index, IndexMut};
 use std::time::Instant;
 
 use itertools::Itertools;
-use rayon::prelude::*;
 use tsplib::NodeCoord;
 
 struct SquareMatrix<T> {
@@ -98,8 +97,8 @@ fn main() {
     let minimum_route = nodes
         .into_iter()
         .permutations(n)
-        .take(1e8 as usize)
-        .par_bridge()
+        // .take(1e8 as usize)
+        // .par_bridge()
         .min_by_key(|route| {
             distances.route_length(route)
         })
