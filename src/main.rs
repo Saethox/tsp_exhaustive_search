@@ -1,7 +1,6 @@
 extern crate core;
 
-use std::fs::File;
-use std::io::BufReader;
+use std::io::Cursor;
 use std::ops::{Index, IndexMut};
 use std::time::Instant;
 
@@ -83,8 +82,8 @@ fn geographical(a: [f32; 2], b: [f32; 2]) -> f32 {
 }
 
 fn main() {
-    let file = File::open("tsp/burma14.tsp").unwrap();
-    let problem = tsplib::parse(BufReader::new(file)).unwrap();
+    let data = include_str!("tsp/burma14.tsp");
+    let problem = tsplib::parse(Cursor::new(data)).unwrap();
     let coords = match problem.node_coord.unwrap() {
         NodeCoord::Two(coords) => coords,
         _ => panic!(),
@@ -99,6 +98,7 @@ fn main() {
     let minimum_route = nodes
         .into_iter()
         .permutations(n)
+        .take(1e8 as usize)
         .par_bridge()
         .min_by_key(|route| {
             distances.route_length(route)
