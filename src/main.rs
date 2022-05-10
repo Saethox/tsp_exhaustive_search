@@ -82,7 +82,7 @@ fn geographical(a: [f32; 2], b: [f32; 2]) -> f32 {
 
 fn main() {
     let filename = "tsp/burma14.tsp";
-    let data = include_str!(filename);
+    let data = include_str!("tsp/burma14.tsp");
     let problem = tsplib::parse(Cursor::new(data)).unwrap();
     let coords = match problem.node_coord.unwrap() {
         NodeCoord::Two(coords) => coords,
