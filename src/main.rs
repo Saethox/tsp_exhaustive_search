@@ -81,7 +81,8 @@ fn geographical(a: [f32; 2], b: [f32; 2]) -> f32 {
 }
 
 fn main() {
-    let data = include_str!("tsp/burma14.tsp");
+    let filename = "tsp/burma14.tsp";
+    let data = include_str!(filename);
     let problem = tsplib::parse(Cursor::new(data)).unwrap();
     let coords = match problem.node_coord.unwrap() {
         NodeCoord::Two(coords) => coords,
@@ -104,6 +105,7 @@ fn main() {
         })
         .unwrap();
 
+    println!("Instance: {}", filename);
     println!("Minimum Route: {:?}", minimum_route);
     println!("Distance: {}", distances.route_length(&minimum_route));
     println!("Time Taken: {:?}", before.elapsed());
